@@ -55,7 +55,6 @@ public class HelpFragment extends Fragment {
         if (adapter != null) {
             adapter.startListening();
         }
-
     }
 
     @Override
@@ -65,4 +64,5 @@ public class HelpFragment extends Fragment {
             adapter.stopListening();
         }
     }
+
 }

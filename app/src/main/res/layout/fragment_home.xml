@@ -38,27 +38,28 @@
         app:layout_constraintVertical_bias="0.498" />
 
     <Button
-        android:id="@+id/btn_help"
+        android:id="@+id/btn_logIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/purple"
-        android:text="@string/btn_need_help"
+        android:text="@string/btn_log_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.874"
+        app:layout_constraintHorizontal_bias="0.866"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.417" />
 
     <Button
-        android:id="@+id/btn_volunteer"
+        android:id="@+id/btn_SignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:backgroundTint="@color/purple"
-        android:text="@string/btn_become_volunteer"
+        android:text="@string/btn_sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintEnd_toStartOf="@+id/btn_logIn"
+        app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.417" />

@@ -1,5 +1,6 @@
 package com.example.charityapp.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,39 +11,37 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.charityapp.R;
-import com.example.charityapp.ui.application.ApplicationFragment;
+import com.example.charityapp.ui.application.ApplicationActivity;
+
+import java.util.zip.Inflater;
 
 public class HomeFragment extends Fragment {
 
-    private Button btnVolunteer;
-    private Button btnNeedy;
+    private Button btnSignUp;
+    private Button btnLogIn;
     private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_home, container, false);
-        btnVolunteer = root.findViewById(R.id.btn_volunteer);
-        btnNeedy = root.findViewById(R.id.btn_help);
+        btnLogIn = root.findViewById(R.id.btn_logIn);
+        btnSignUp = root.findViewById(R.id.btn_SignUp);
 
-        btnVolunteer.setOnClickListener(new View.OnClickListener() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApplicationFragment nextFrag = new ApplicationFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment, nextFrag, "findVolunteerFrag")
-                        .addToBackStack("volunteer")
-                        .commit();
+                Intent myIntent = new Intent(getActivity(), ApplicationActivity.class);
+                myIntent.putExtra("string", "signup");
+                startActivity(myIntent);
             }
         });
-        btnNeedy.setOnClickListener(new View.OnClickListener() {
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApplicationFragment nextFrag = new ApplicationFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment, nextFrag, "findNeedyFrag")
-                        .addToBackStack("needy")
-                        .commit();
+                Intent myIntent = new Intent(getActivity(), ApplicationActivity.class);
+                myIntent.putExtra("string", "login");
+                startActivity(myIntent);
             }
         });
 

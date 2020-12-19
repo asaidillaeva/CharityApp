@@ -6,17 +6,17 @@
     android:background="@color/primary"
 
     android:gravity="center"
-    tools:context=".ui.application.ApplicationFragment">
+    tools:context=".ui.application.ApplicationActivity">
 
 
     <LinearLayout
-        android:id="@+id/application_needy"
+        android:id="@+id/signup_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
         android:layout_margin="@dimen/text_margin"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical"
         android:background="@drawable/custom_border">
 
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/application_for_needies"
+            android:text="@string/application_to_signup_text"
             android:textAlignment="center"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-black"
@@ -32,9 +32,10 @@
             android:textSize="@dimen/text_title" />
 
 
+
         <EditText
             android:padding="4dp"
-            android:id="@+id/needy_fullname"
+            android:id="@+id/user_fullname"
             android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +45,7 @@
             android:textSize="@dimen/text_size"
             />
         <EditText
-            android:id="@+id/needy_address"
+            android:id="@+id/user_address"
             android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +55,7 @@
             android:textSize="@dimen/text_size"
             />
         <EditText
-            android:id="@+id/needy_needs"
+            android:id="@+id/gift_or_needs"
             android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
             />
 
         <EditText
-            android:id="@+id/needy_mobile"
+            android:id="@+id/user_phone"
             android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,8 +77,9 @@
             android:hint="Mobile number"
             android:textSize="@dimen/text_size"
             />
+
         <ImageView
-            android:id="@+id/needy_image"
+            android:id="@+id/user_image"
             android:layout_gravity="center"
             android:layout_width="100dp"
             android:layout_height="60dp"
@@ -92,7 +94,7 @@
             />
 
         <Button
-            android:id="@+id/btn_submit_needy"
+            android:id="@+id/btn_submit_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Submit"
@@ -101,7 +103,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/application_volunteer"
+        android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -115,49 +117,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/application_for_volunteers"
+            android:text="@string/application_to_login"
             android:textAlignment="center"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-black"
             android:textColor="@color/white"
             android:textSize="@dimen/text_title" />
 
-
         <EditText
-            android:padding="4dp"
-            android:id="@+id/volunteer_fullname"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:hint="Full Name"
-            android:textSize="@dimen/text_size"
-            />
-        <EditText
-            android:id="@+id/volunteer_age"
-            android:padding="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:inputType="number"
-            android:hint="Age"
-            android:textSize="@dimen/text_size"
-            />
-        <EditText
-            android:id="@+id/volunteer_"
-            android:padding="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            android:hint="Reason"
-            android:textSize="@dimen/text_size"
-            />
-
-        <EditText
-            android:id="@+id/volunteer_mobile"
+            android:id="@+id/mobile"
             android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,6 +134,16 @@
             android:inputType="phone"
             android:maxLines="1"
             android:hint="Mobile number"
+            android:textSize="@dimen/text_size"
+            />
+        <EditText
+            android:id="@+id/code_login"
+            android:padding="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:hint="Code "
             android:textSize="@dimen/text_size"
             />
 
@@ -178,7 +156,90 @@
             />
     </LinearLayout>
 
-    <include layout="@layout/autho_layout"/>
+    <LinearLayout
+        android:id="@+id/who"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_margin="@dimen/text_margin"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="@drawable/custom_border">
+        <Button
+            android:id="@+id/btn_as_needy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I am needy"
+            android:backgroundTint="@color/purple"
+            />
+
+        <Button
+            android:id="@+id/btn_as_sponsor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I am donator"
+            android:backgroundTint="@color/purple"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/code_check_layout"
+        android:visibility="gone"
+        android:layout_margin="@dimen/text_margin"
+        android:background="@drawable/custom_border"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/smsCodeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="19dp"
+            android:hint="Code"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="We have send an SMS with an activation code to your phone. Type Code in "
+            android:textSize="16sp"
+            android:layout_below="@id/smsCodeEditText"/>
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView2"
+            android:layout_alignEnd="@+id/textView2"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="166dp"
+            android:text="60"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/checkCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Go"
+            android:layout_below="@id/timer"/>
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

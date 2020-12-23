@@ -1,11 +1,11 @@
-package com.example.charityapp;
+package com.example.charity;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.charityapp.ui.help.HelpFragment;
-import com.example.charityapp.ui.home.HomeFragment;
+import com.example.charity.ui.DonatorsFragment;
+import com.example.charity.ui.HelpFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +17,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public ViewPagerAdapter(FragmentManager manager) {
         super(manager);
     }
+
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
-                return new HomeFragment();
+                return new DonatorsFragment();
             case 1:
                 return new HelpFragment();
         }

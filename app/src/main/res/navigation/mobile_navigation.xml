@@ -6,14 +6,14 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.charityapp.ui.home.HomeFragment"
+        android:id="@+id/navigation_donators"
+        android:name="com.example.charity.ui.donator.DonatorsFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_donators" />
 
     <fragment
         android:id="@+id/navigation_help"
-        android:name="com.example.charityapp.ui.help.HelpFragment"
+        android:name="com.example.charity.ui.HelpFragment"
         android:label="@string/title_help"
         tools:layout="@layout/fragment_help" />
 </navigation>

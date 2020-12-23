@@ -1,4 +1,4 @@
-package com.example.charityapp;
+package com.example.charity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -6,13 +6,12 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
-import com.example.charityapp.ui.help.HelpFragment;
-import com.example.charityapp.ui.home.HomeFragment;
+import com.example.charity.ui.DonatorsFragment;
+import com.example.charity.ui.HelpFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
 
 
@@ -20,12 +19,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bnav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.nav_host_fragment, new HomeFragment())
+                .replace(R.id.nav_host_fragment_container, new DonatorsFragment())
                 .commit();
     }
 
@@ -39,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_item_help:
                     selectedFrag = new HelpFragment();
                     break;
-                case R.id.menu_item_home:
-                    selectedFrag = new HomeFragment();
+                case R.id.menu_item_donators:
+                    selectedFrag = new DonatorsFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment, selectedFrag)
+                    .replace(R.id.nav_host_fragment_container, selectedFrag)
                     .commit();
             return true;
         }

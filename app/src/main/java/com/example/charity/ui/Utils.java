@@ -1,4 +1,4 @@
-package com.example.charityapp.ui.help;
+package com.example.charity.ui;
 
 
 import android.graphics.Color;

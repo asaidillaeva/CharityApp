@@ -6,8 +6,8 @@
     android:fitsSystemWindows="true"
     android:background="@color/primary"
     android:orientation="vertical"
-    android:id="@+id/fragment_help"
-    tools:context=".HomeActivity">
+    android:id="@+id/fragment_donators"
+    tools:context=".ui.DonatorsFragment">
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

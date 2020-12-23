@@ -1,4 +1,4 @@
-package com.example.charityapp.ui.help;
+package com.example.charity.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.charityapp.R;
-import com.example.charityapp.model.Needy;
+import com.example.charity.R;
+import com.example.charity.model.User;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -35,8 +35,8 @@ public class HelpFragment extends Fragment {
     private void setUpRecyclerView() {
         Query query = FirebaseDatabase.getInstance().getReference("needy");
 
-        FirebaseRecyclerOptions<Needy> options = new FirebaseRecyclerOptions.Builder<Needy>()
-                .setQuery(query, Needy.class)
+        FirebaseRecyclerOptions<User> options = new FirebaseRecyclerOptions.Builder<User>()
+                .setQuery(query, User.class)
                 .build();
 
         adapter = new RecyclerViewAdapter(options);

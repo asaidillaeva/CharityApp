@@ -1,4 +1,4 @@
-package com.example.charityapp.ui.help;
+package com.example.charity.ui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -20,29 +20,29 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.example.charityapp.R;
-import com.example.charityapp.model.Needy;
+import com.example.charity.R;
+import com.example.charity.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-public class RecyclerViewAdapter extends FirebaseRecyclerAdapter<Needy, RecyclerViewAdapter.MyViewHolder> {
+public class RecyclerViewAdapter extends FirebaseRecyclerAdapter<User, RecyclerViewAdapter.MyViewHolder> {
 
     private Context context;
     private OnItemClickListener onItemClickListener;
 
 
-    public RecyclerViewAdapter(@NonNull FirebaseRecyclerOptions<Needy> options) {
+    public RecyclerViewAdapter(@NonNull FirebaseRecyclerOptions<User> options) {
         super(options);
     }
 
 
     @Override
-    protected void onBindViewHolder(@NonNull MyViewHolder holder, int i, @NonNull Needy needy) {
+    protected void onBindViewHolder(@NonNull MyViewHolder holder, int i, @NonNull User needy) {
 
-        holder.fullname.setText(needy.getFullName());
+        holder.fullname.setText(needy.getUsername());
         holder.address.setText(needy.getAddress());
         holder.mobile.setText(needy.getPhone());
-        holder.need.setText(needy.getNeed());
+        holder.need.setText(needy.getNeedsOrGift());
         holder.time.setText(Utils.DateFormat(needy.getTimestamp().toString()));
 
 
@@ -54,7 +54,7 @@ public class RecyclerViewAdapter extends FirebaseRecyclerAdapter<Needy, Recycler
 
 
         Glide.with(context)
-                .load(needy.getUrlToImage())
+                .load(needy.getImage())
                 .apply(requestOptions)
                 .listener(new RequestListener<Drawable>() {
                     @Override

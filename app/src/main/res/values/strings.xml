@@ -10,4 +10,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="application_to_signup_text">Sign Up</string>
     <string name="application_to_login">Log in</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>

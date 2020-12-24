@@ -22,9 +22,7 @@ Even small help means a lot to others. Our team decides to make the platform, wh
 
 ## Technologies 
 
--Figma Design 
-
-[Link](https://www.figma.com/file/4oQWMMcYzPrqAUKr6DifqJ/main_activity?node-id=0%3A1)
+-Figma Design    [Link](https://www.figma.com/file/4oQWMMcYzPrqAUKr6DifqJ/main_activity?node-id=0%3A1)
 
 -Java
 

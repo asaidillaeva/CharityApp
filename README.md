@@ -1,7 +1,7 @@
 # CharityApp
 
 
-![Logo](https://www.flaticon.com/free-icon/donation_3349221?related_item_id=3349234&term=donation)
+![Logo](https://imgur.com/a/1s2dKms)
 
 ---
 -[Description](#descripion)

@@ -1,7 +1,7 @@
 # CharityApp
 
 
----
+![Logo](https://www.flaticon.com/free-icon/donation_3349234?term=donation&page=1&position=25&related_item_id=3349234)
 
 ---
 -[Description](#descripion)
@@ -34,7 +34,7 @@ Even small help means a lot to others. Our team decides to make the platform, wh
 
 -[Pretty Time library](https://github.com/ocpsoft/prettytime)
 
-##Screenshots
+## Screenshots
 
 
 

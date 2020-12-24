@@ -3,6 +3,9 @@ package com.example.charity.model;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class User {
 
     private String userID;
@@ -40,6 +43,11 @@ public class User {
         this.password = password;
     }
 
+    public String getReadableDate() {
+        Date d = getTimestamp().toDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.mm.yyyy");
+        return sdf.format(d);
+    }
     public String getAddress() {
         return address;
     }
@@ -87,4 +95,6 @@ public class User {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
-}
+
+    }
+

@@ -51,11 +51,4 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:src="@android:color/holo_blue_dark"/>
 </LinearLayout>

@@ -10,7 +10,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.charity.model.User;
+import com.example.charity.ui.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -18,7 +22,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,13 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
     private View whoView, loginView, signupView, codeCheckView, mainView;
     private EditText usernameSignup, giftOrNeeds, mobileEditText, addressEditText, passwordSignup, usernameLogin, passwordLogin, codeEditText;
-    private String username, address, mobile, needsOrGift, password, who, code;
+    private String username, address, mobile, needsOrGift, password, who, code, what;
     private ProgressBar progressBar;
 
     private FirebaseFirestore database;
     private DatabaseReference mDatabase;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks callbacks;
     private String verificationId;
+    private boolean userExist;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         whoView = findViewById(R.id.who);
         loginView = findViewById(R.id.login_layout);
         signupView = findViewById(R.id.signup_layout);
-        codeCheckView = findViewById(R.id.checkCode);
+        codeCheckView = findViewById(R.id.code_check_layout);
         mainView = findViewById(R.id.layout_home);
         progressBar = findViewById(R.id.progressbar);
 
@@ -85,11 +93,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signUpClicked(View view) {
+        what = "signup";
         mainView.setVisibility(View.GONE);
         whoView.setVisibility(View.VISIBLE);
     }
 
     public void logInClicked(View view) {
+        what = "login";
         mainView.setVisibility(View.GONE);
         loginView.setVisibility(View.VISIBLE);
     }
@@ -111,44 +121,93 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitSignUpClicked(View view) {
-        username = usernameSignup.getText().toString();
-        address = addressEditText.getText().toString();
-        mobile = mobileEditText.getText().toString();
-        needsOrGift = giftOrNeeds.getText().toString();
-        password = passwordSignup.getText().toString();
+        username = usernameSignup.getText().toString().trim();
+        address = addressEditText.getText().toString().trim();
+        mobile = mobileEditText.getText().toString().trim();
+        needsOrGift = giftOrNeeds.getText().toString().trim();
+        password = passwordSignup.getText().toString().trim();
         signupView.setVisibility(View.GONE);
+        codeCheckView.setVisibility(View.VISIBLE);
         PhoneAuthProvider.getInstance().verifyPhoneNumber(mobile,
                 60, TimeUnit.SECONDS, this, callbacks);
     }
 
     public void submitLoginClicked(View view) {
-        username = usernameLogin.getText().toString();
-        password = passwordLogin.getText().toString();
-
+        username = usernameLogin.getText().toString().trim();
+        password = passwordLogin.getText().toString().trim();
+        exist(username, password);
+        loginView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     public void checkCodeClicked(View view) {
-        codeCheckView.setVisibility(View.VISIBLE);
-        code = codeEditText.getText().toString();
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
-        signIn(credential);
+        codeCheckView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        code = codeEditText.getText().toString().trim();
+        signIn(PhoneAuthProvider.getCredential(verificationId, code));
+    }
+
+    private boolean exist(String userna, String password) {
+        userExist = false;
+        FirebaseFirestore.getInstance().collection("user")
+                .whereEqualTo("username", userna)
+                .whereEqualTo("password", password)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot snapshots) {
+                        if (snapshots != null) {
+                            userExist = true;
+                            for (DocumentSnapshot snapshot : snapshots) {
+                                user = (User) snapshot.toObject(User.class);
+                                mobile = user.getPhone();
+                            }
+                            progressBar.setVisibility(View.GONE);
+                            codeCheckView.setVisibility(View.VISIBLE);
+                            PhoneAuthProvider.getInstance().verifyPhoneNumber(mobile,
+                                    60, TimeUnit.SECONDS, MainActivity.this, callbacks);
+                        }
+                    }
+
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressBar.setVisibility(View.GONE);
+                        whoView.setVisibility(View.VISIBLE);
+                        what = "signup";
+                        Toast.makeText(getApplicationContext(),
+                                "You haven't registered yet. Please Sign Up first!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+        return userExist;
     }
 
     private void signIn(PhoneAuthCredential phoneAuthCredential) {
-        FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    saveUser();
-                    codeCheckView.setVisibility(View.GONE);
-                    progressBar.setVisibility(View.VISIBLE);
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Authentication failed!" + task.getException().getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            if (what.equals("signup")) {
+                                saveUser();
+                            }
+                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Welcome !", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        codeEditText.setText("");
+                        Toast.makeText(getApplicationContext(),
+                                "Incorrect Code !" + e.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void saveUser() {
@@ -171,15 +230,17 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             progressBar.setVisibility(View.GONE);
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-//                            intent.putExtra("username", username);
                             startActivity(intent);
-                            Toast.makeText(getApplicationContext(), "You entered successfully!", Toast.LENGTH_SHORT);
-
+                            Toast.makeText(getApplicationContext(), "Your information saved successfully!", Toast.LENGTH_SHORT);
                             finish();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Retry saving", Toast.LENGTH_SHORT);
-
                         }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Retry saving" + e.getMessage(), Toast.LENGTH_SHORT);
+
                     }
                 });
     }

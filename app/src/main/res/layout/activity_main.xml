@@ -115,6 +115,7 @@
             android:layout_marginBottom="10dp"
             android:background="@color/white"
             android:hint="Password"
+            android:inputType="textPassword"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/text_size"
             android:textColor="@color/black"
@@ -226,6 +227,7 @@
             android:layout_marginBottom="10dp"
             android:background="@color/white"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="@dimen/text_size"
             android:textColor="@color/black"
@@ -304,6 +306,7 @@
             android:layout_marginRight="20dp"
             android:text="We have send an SMS with an activation code to your phone. Type Code in "
             android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_below="@id/code_edit_text"/>
 
         <TextView

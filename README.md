@@ -1,7 +1,7 @@
 # CharityApp
 
 
-![Logo](https://imgur.com/a/1s2dKms)
+![Logo](https://i.imgur.com/qQ2LUz9.png)
 
 ---
 -[Description](#descripion)

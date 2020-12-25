@@ -41,4 +41,4 @@ Even small help means a lot to others. Our team decides to make the platform, wh
 
 By below link you can watch how application works.
 
-[Link](https://www.youtube.com/watch?v=M9m7LrktuYM&feature=youtu.be)
+[Link](https://youtu.be/wK-pOtD6AoU)
